@@ -1,4 +1,4 @@
-![Doug Supernaw](http://www.cmt.com/shared/media/images/amg_artist_portraits/standard/drp100/p128/p12894rt985.jpg) 
+![Doug Supernaw](http://dougsupernaw.org/wp-content/gallery/galler1/doug_1_pg.jpg) 
 
 # Supernaw
 
