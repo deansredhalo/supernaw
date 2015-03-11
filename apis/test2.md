@@ -12,7 +12,7 @@ Furthermore, in API Blueprint, any `resource model` you have defined can be refe
 # Group Messages
 Group of all messages-related resources.
 
-## My Message [/message]
+## Messages [/messages]
 
 + Model (application/vnd.siren+json)
   
@@ -39,14 +39,43 @@ At this point we will utilize our `Message` resource model and reference it in `
 
 + Response 201
 
-    [My Message][]
+    [Messages][]
     
+### Retrieve all Messages [GET]
+At this point we will utilize our `Message` resource model and reference it in `Response 200`.
+
++ Response 200
+
+    [Messages][]
+
+## Single Message [/message/:id]
+
++ Model (application/vnd.siren+json)
+  
+    This is the `application/vnd.siren+json` message resource representation.
+
+    + Headers
+    
+            Location: http://api.acme.com/message            
+
+    + Body
+
+            {
+              "class": [ "message" ],
+              "properties": { 
+                    "message": "Hello World!" 
+              },
+              "links": [
+                    { "rel": "self" , "href": "/message" }
+              ]
+            }
+
 ### Retrieve a Message [GET]
 At this point we will utilize our `Message` resource model and reference it in `Response 200`.
 
 + Response 200
 
-    [My Message][]
+    [Single Message][]
 
 ### Update a Message [PUT]
 

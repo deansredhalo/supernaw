@@ -5,8 +5,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var MongoClient = require('mongodb').MongoClient;
-var Server = require('mongodb').Server;
+var mongojs = require('mongojs');
 var app = express();
 var router = express.Router();
 
@@ -19,6 +18,10 @@ var responses = [];
 var responseModels = [];
 var createdSchemas = [];
 var fileData;
+
+var databaseUrl = "mydb";
+var collections = ["mycollection"]
+var db = mongojs.connect(databaseUrl, collections);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -38,34 +41,53 @@ Supernaw.prototype.declareRoutes = function(items) {
 		var tmpModel = module.exports.base.models[item.title].modelName;
 
 		if (item.title === tmpModel) {
-			var the_model = module.exports;
 
 			if (item.method == 'GET') {
-				router.route(item.path).get(function(req, res) {
 
-					the_model.find(function(err, returns) {
-						if (err) {
-							return res.send(err);
-						}
-						res.json(returns);
+				if (item.path.indexOf(':') === -1) {
+					router.route(item.path).get(function(req, res) {
+
+						db.mycollection.find(function(err, returns) {
+							if (err) {
+								return res.send(err);
+							}
+							res.json(returns);
+						});
 					});
-				});
+				}
+				else {
+					router.route(item.path).get(function(req, res) {
+
+						var id = req.url.split('/')[2];
+
+						db.mycollection.findOne({ _id:mongojs.ObjectId(id) }, function(err, returns) {
+							if (err) {
+								return res.send(err);
+							}
+							res.json(returns);
+						});
+					});
+				}
 			}
 			else if (item.method == 'POST') {
 				router.route(item.path).post(function(req, res) {
 					req.headers['content-type'] = 'application/json; charset=utf-8';
 
-					var tmpItem = module.exports.base.models[item.title].model(req.body);
-
-					console.log(module.exports.base.models[item.title].model);
-
-					tmpItem.save(function(err) {
-						if (err) {
-							return res.send(err);
-						}
-					 
+					db.mycollection.save(req.body, function() {
 						res.send({ message: 'Item Added' });
 					});
+
+				});
+			}
+			else if (item.method == 'PUT') {
+				console.log(item);
+				router.route(item.path).put(function(req, res) {
+					req.headers['content-type'] = 'application/json; charset=utf-8';
+
+					db.mycollection.save(req.body, function() {
+						res.send({ message: 'Item Updated '});
+					});
+
 				});
 			}
 		}
@@ -200,20 +222,6 @@ Supernaw.prototype.readFile = function(file) {
 		throw error;
 	}
 }
-
-var dbName = 'supernaw';
-var connectionString = 'mongodb://localhost:27017/' + dbName;
-
-// var mongoClient = new MongoClient(new Server('localhost', 27017));
-// mongoClient.open(function(err, mongoClient) { //C
-//   if (!mongoClient) {
-//       console.error("Error! Exiting... Must start MongoDB first");
-//       process.exit(1); //D
-//   }
-//   var db = mongoClient.db('supernaw');
-// });
- 
-mongoose.connect(connectionString);
 
 var supernaw = new Supernaw(inputFile);
 
