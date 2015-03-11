@@ -1,3 +1,5 @@
+'use strict';
+
 var fs = require('fs');
 var minimist = require('minimist');
 var protagonist = require('protagonist');
@@ -60,7 +62,7 @@ Supernaw.prototype.declareRoutes = function(items) {
 
 						var id = req.url.split('/')[2];
 
-						db.mycollection.findOne({ _id:mongojs.ObjectId(id) }, function(err, returns) {
+						db.mycollection.findOne({ _id: mongojs.ObjectId(id) }, function(err, returns) {
 							if (err) {
 								return res.send(err);
 							}
@@ -80,12 +82,26 @@ Supernaw.prototype.declareRoutes = function(items) {
 				});
 			}
 			else if (item.method == 'PUT') {
-				console.log(item);
 				router.route(item.path).put(function(req, res) {
 					req.headers['content-type'] = 'application/json; charset=utf-8';
 
-					db.mycollection.save(req.body, function() {
+					var id = req.url.split('/')[2];
+					var update = req.body;
+
+					db.mycollection.findAndModify({ query: { _id: mongojs.ObjectId(id) }, update: { $set: update }, new: false }, function() {
 						res.send({ message: 'Item Updated '});
+					});
+
+				});
+			}
+			else if (item.method == 'DELETE') {
+				router.route(item.path).delete(function(req, res) {
+					req.headers['content-type'] = 'application/json; charset=utf-8';
+
+					var id = req.url.split('/')[2];
+
+					db.mycollection.remove({ _id: mongojs.ObjectId(id) }, function() {
+						res.send({ message: 'Item Deleted '});
 					});
 
 				});
@@ -106,12 +122,12 @@ Supernaw.prototype.declareSchemas = function(models) {
 
 		if (model.method == 'POST') {
 
-			for (key in model.body) {
+			for (var key in model.body) {
 				tmpObj[key] = model.body[key];
 			}
 		}
 
-		for (key in tmpObj) {
+		for (var key in tmpObj) {
 			schemaObj[key] = (typeof tmpObj[key]);
 		}
 
@@ -169,14 +185,14 @@ Supernaw.prototype.walkBlueprint = function(fileObject) {
 		response.method = response.method.replace(/(\r\n|\n|\r)/gm,"");
 		response.path = response.path.replace(/(\r\n|\n|\r)/gm,"");
 
-		for (key in response.model) {
+		for (var key in response.model) {
 			var item = response.model[key];
 			if (typeof item === 'string') {
 				item = item.replace(/(\r\n|\n|\r)/gm,"");
 			}
 		}
 
-		for (key in response.responses) {
+		for (var key in response.responses) {
 			var item = response.responses[key];
 			if (typeof item === 'string') {
 				item = item.replace(/(\r\n|\n|\r)/gm,"");
@@ -206,7 +222,7 @@ Supernaw.prototype.parseFile = function(file) {
 			return;
 		}
 
-		resultJSON = result.ast;
+		var resultJSON = result.ast;
 		supernaw.walkBlueprint(resultJSON);
 
 	});

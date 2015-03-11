@@ -39,7 +39,8 @@ At this point we will utilize our `Message` resource model and reference it in `
 
 + Response 201
 
-    [Messages][]
+    + Body
+            { "message": "Item added." }
     
 ### Retrieve all Messages [GET]
 At this point we will utilize our `Message` resource model and reference it in `Response 200`.
@@ -88,3 +89,12 @@ At this point we will utilize our `Message` resource model and reference it in `
         { "message": "All your base are belong to us." }
 
 + Response 204
+
+### Delete a Message [DELETE]
+At this point we will utilize our `Message` resource model and reference it in `Response 200`.
+
++ Response 200
+
+    + Body
+
+            { "message": "Item deleted." }
