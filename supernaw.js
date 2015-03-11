@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 'use strict';
 
 var fs = require('fs');
@@ -12,10 +14,11 @@ var app = express();
 var router = express.Router();
 
 var args = minimist(process.argv.slice(2));
-var fileName = args.name;
+var fileName = args._[0];
+console.log(fileName);
 
 // declare our global variables
-var inputFile = 'apis/test2.md';
+var inputFile = fileName;
 var responses = [];
 var responseModels = [];
 var createdSchemas = [];
@@ -240,5 +243,11 @@ Supernaw.prototype.readFile = function(file) {
 }
 
 var supernaw = new Supernaw(inputFile);
+
+app.set('port', process.env.PORT || 1993);
+
+var server = app.listen(app.get('port'), function() {
+	console.log("You know the lady's a lot like Reno...Supernaw is running on port " + server.address().port);
+});
 
 module.exports = app;

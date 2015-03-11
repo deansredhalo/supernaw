@@ -5,9 +5,9 @@
   "author": "T-Jay Tipps",
   "description": "Automatically generate a living, RESTful API backend for CRUD ops from an API Blueprint document.",
   "scripts": {
-    "start": "node .bin/reno"
+    "start": "node ./supernaw"
   },
-  "main":"./bin/reno",
+  "main":"./supernaw",
   "repository": {
     "type": "git",
     "url": "https://github.com/deansredhalo/supernaw"
@@ -33,6 +33,6 @@
   },
   "license": "MIT",
   "bin": {
-    "supernaw": ".bin/reno"
+    "supernaw": "./supernaw"
   }
 }
