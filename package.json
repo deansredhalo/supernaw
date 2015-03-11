@@ -27,7 +27,11 @@
     "body-parser": "~1.0.0",
     "mongoose": "~3.8.11",
     "protagonist": "~0.17.1",
-    "mongodb": "*"
+    "mongodb": "*",
+    "minimist": "*"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "bin": {
+    "supernaw": "./bin/www"
+  }
 }

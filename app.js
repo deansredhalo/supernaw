@@ -1,12 +1,17 @@
 var fs = require('fs');
+var minimist = require('minimist');
 var protagonist = require('protagonist');
 var express = require('express');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var Model;
+var MongoClient = require('mongodb').MongoClient;
+var Server = require('mongodb').Server;
 var app = express();
 var router = express.Router();
+
+var args = minimist(process.argv.slice(2));
+var fileName = args.name;
 
 // declare our global variables
 var inputFile = 'apis/test2.md';
@@ -14,6 +19,12 @@ var responses = [];
 var responseModels = [];
 var createdSchemas = [];
 var fileData;
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+	extended: true
+}));
+app.use('/', router);
 
 var Supernaw = function(file) {
 	this.readFile(file);
@@ -42,7 +53,11 @@ Supernaw.prototype.declareRoutes = function(items) {
 			}
 			else if (item.method == 'POST') {
 				router.route(item.path).post(function(req, res) {
-					var tmpItem = module.exports.base.models[item.title](req.body);
+					req.headers['content-type'] = 'application/json; charset=utf-8';
+
+					var tmpItem = module.exports.base.models[item.title].model(req.body);
+
+					console.log(module.exports.base.models[item.title].model);
 
 					tmpItem.save(function(err) {
 						if (err) {
@@ -186,15 +201,20 @@ Supernaw.prototype.readFile = function(file) {
 	}
 }
 
-var supernaw = new Supernaw(inputFile);
-
 var dbName = 'supernaw';
 var connectionString = 'mongodb://localhost:27017/' + dbName;
+
+// var mongoClient = new MongoClient(new Server('localhost', 27017));
+// mongoClient.open(function(err, mongoClient) { //C
+//   if (!mongoClient) {
+//       console.error("Error! Exiting... Must start MongoDB first");
+//       process.exit(1); //D
+//   }
+//   var db = mongoClient.db('supernaw');
+// });
  
 mongoose.connect(connectionString);
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded());
-app.use('/', router);
+var supernaw = new Supernaw(inputFile);
 
 module.exports = app;
