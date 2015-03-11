@@ -2,6 +2,8 @@
 
 # Supernaw
 
+### API Blueprint-to-Functional REST API Generator
+
 A command-line tool for generating living API backends for CRUD operations in Node/Express and MongoDB by importing an [API Blueprint](http://www.apiblueprint.org/ "API Blueprint") file. Supernaw is the first in my line of applications/ideas named after early 90s era country singers, this one named after Doug Supernaw, who is famous for the hit singles "Reno" and "I Don't Call Him Daddy."
 
 ## Installation
