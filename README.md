@@ -8,4 +8,4 @@ A command-line tool for generating living API backends for CRUD operations in No
 
 You can install Supernaw via the npm package installer, like so
 
-```npm install supernaw
+	$ npm install supernaw
