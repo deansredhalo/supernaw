@@ -44,6 +44,11 @@ Fire up Postman or whatever REST client you prefer and you can now begin making 
 ## Things to do
 
 Thorough testing with tons of API Blueprint docs.
+
 This thing probably needs a good refactoring/overhaul/rewrite when I'm not slammed.
+
 Add unit tests, preferably either using Mocha or Karma.
+
 Add custom responses from server.
+
+Implement schema comparisons for POST.
