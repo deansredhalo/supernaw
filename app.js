@@ -29,8 +29,6 @@ Supernaw.prototype.declareRoutes = function(items) {
 		if (item.title === tmpModel) {
 			var the_model = module.exports;
 
-			console.log(the_model);
-
 			if (item.method == 'GET') {
 				router.route(item.path).get(function(req, res) {
 
