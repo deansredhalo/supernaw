@@ -15,10 +15,9 @@ var router = express.Router();
 
 var args = minimist(process.argv.slice(2));
 var fileName = args._[0];
-console.log(fileName);
 
 // declare our global variables
-var inputFile = fileName;
+var inputFile = './apis/test2.md';
 var responses = [];
 var responseModels = [];
 var createdSchemas = [];
@@ -91,7 +90,7 @@ Supernaw.prototype.declareRoutes = function(items) {
 					var id = req.url.split('/')[2];
 					var update = req.body;
 
-					db.mycollection.findAndModify({ query: { _id: mongojs.ObjectId(id) }, update: { $set: update }, new: false }, function() {
+					db.mycollection.update({ _id: mongojs.ObjectId(id) }, { $set: update }, function() {
 						res.send({ message: 'Item Updated '});
 					});
 
