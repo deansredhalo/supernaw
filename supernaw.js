@@ -23,7 +23,7 @@ var responseModels = [];
 var createdSchemas = [];
 var fileData;
 
-var databaseUrl = "mydb";
+var databaseUrl = "supernaw";
 var collections = ["mycollection"]
 var db = mongojs.connect(databaseUrl, collections);
 

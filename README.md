@@ -10,9 +10,14 @@ You can install Supernaw via the npm package installer, like so
 
 	$ npm install supernaw
 
-Once Supernaw has finished installing, you'll need to check to start the _MongoDB_ server with the path to where you want your database stored (the default is _/data_) by using the following command
+Once Supernaw has finished installing, you'll need to check to start the _MongoDB_ server with the path to where you want your database stored by using the following command
 	
-	$ mongod --dbpath <path-of-database or simply data>
+	$ mongod --dbpath <path-of-database>
+
+Example action
+
+	$ mkdir data
+	$ mongod --dbpath data
 
 This will engage the MongoDB server and create your database. From here you are ready to use Supernaw to begin building your backends.
 
@@ -24,9 +29,7 @@ To begin using Supernaw, start the application using
 
 If you want to use the test API document that is included, you can try that out like this
 
-```
 	$ supernaw ./apis/test2.md
-```
 
 If all goes well, you should see the following message in your terminal
 
