@@ -1,4 +1,4 @@
-[id]: http://www.cmt.com/shared/media/images/amg_artist_portraits/standard/drp100/p128/p12894rt985.jpg "Doug Supernaw!"
+![Doug Supernaw](http://www.cmt.com/shared/media/images/amg_artist_portraits/standard/drp100/p128/p12894rt985.jpg) 
 
 # Supernaw
 
