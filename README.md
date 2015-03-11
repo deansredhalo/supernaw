@@ -34,7 +34,7 @@ If all goes well, you should see the following message in your terminal
 You know the lady's a lot like Reno...Supernaw is running on port 1993
 ```
 
-Fire up Postman or whatever REST client you prefer and you can now begin making API CRUD calls using the prefix `http://localhost:1993/` (1993 was the year of Doug Supernaw's biggest hit, "Reno" -- FUN FACT!).
+Fire up Postman or whatever REST client you prefer and you can now begin making API CRUD calls using the prefix `http://localhost:1993/` (1993 was the year of Doug Supernaw's biggest hit, "Reno" -- FUN FACT!). The database will be empty to start, so you'll have to try doing some POSTs to populate it.
 
 ## Things to do
 
