@@ -91,7 +91,7 @@ Supernaw.prototype.declareRoutes = function(items) {
 					var update = req.body;
 
 					db.mycollection.update({ _id: mongojs.ObjectId(id) }, { $set: update }, function() {
-						res.send({ message: 'Item Updated', , _id: mongojs.ObjectId(id) });
+						res.send({ message: 'Item Updated', _id: mongojs.ObjectId(id) });
 					});
 
 				});
