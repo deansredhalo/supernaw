@@ -103,7 +103,7 @@ Supernaw.prototype.declareRoutes = function(items) {
 					var id = req.url.split('/')[2];
 
 					db.mycollection.remove({ _id: mongojs.ObjectId(id) }, function() {
-						res.send({ message: 'Item Deleted', , _id: mongojs.ObjectId(id) });
+						res.send({ message: 'Item Deleted', _id: mongojs.ObjectId(id) });
 					});
 
 				});
