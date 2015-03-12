@@ -17,7 +17,7 @@ var args = minimist(process.argv.slice(2));
 var fileName = args._[0];
 
 // declare our global variables
-var inputFile = './apis/test2.md';
+var inputFile = fileName;
 var responses = [];
 var responseModels = [];
 var createdSchemas = [];
@@ -78,7 +78,7 @@ Supernaw.prototype.declareRoutes = function(items) {
 					req.headers['content-type'] = 'application/json; charset=utf-8';
 
 					db.mycollection.save(req.body, function() {
-						res.send({ message: 'Item Added' });
+						res.send({ message: 'Item Added', _id: req.body._id });
 					});
 
 				});
@@ -91,7 +91,7 @@ Supernaw.prototype.declareRoutes = function(items) {
 					var update = req.body;
 
 					db.mycollection.update({ _id: mongojs.ObjectId(id) }, { $set: update }, function() {
-						res.send({ message: 'Item Updated '});
+						res.send({ message: 'Item Updated', , _id: mongojs.ObjectId(id) });
 					});
 
 				});
@@ -103,7 +103,7 @@ Supernaw.prototype.declareRoutes = function(items) {
 					var id = req.url.split('/')[2];
 
 					db.mycollection.remove({ _id: mongojs.ObjectId(id) }, function() {
-						res.send({ message: 'Item Deleted '});
+						res.send({ message: 'Item Deleted', , _id: mongojs.ObjectId(id) });
 					});
 
 				});
@@ -201,15 +201,17 @@ Supernaw.prototype.walkBlueprint = function(fileObject) {
 			}
 		}
 
-		responseModels.push(
-			{
-				"title": response.name,
-				"body": JSON.parse(response.model.body),
-				"method": response.method,
-				"path": response.path
-			}
-		);
+		if (response.model.body != undefined) {
 
+			responseModels.push(
+				{
+					"title": response.name,
+					"body": JSON.parse(response.model.body),
+					"method": response.method,
+					"path": response.path
+				}
+			);
+		}
 	}
 
 	supernaw.declareSchemas(responseModels);

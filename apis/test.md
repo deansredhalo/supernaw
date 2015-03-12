@@ -418,14 +418,14 @@ The listener can see all the items that have been shared with them (songs, stati
                     "link": "stations/top-100-rock.html",
                     "date": 1396908762,
                     "image": "base-64 string",
-                    "measures": [
+                    "measures": {
                         "languages": [ 1, 3, 5 ],
                         "genres": [ 1, 6, 12, 14 ],
                         "subGenres": [ 2, 4, 9 ],
                         "moods": [ 1, 3 ],
                         "instruments": [ 6, 7, 9 ],
                         "similar": [ 1, 12, 119 ]
-                    ],
+                    },
                     "message": "Check this out!"
                 }
             }
@@ -447,14 +447,14 @@ Returns an array of items.
                         "link": "stations/top-100-rock.html",
                         "date": 1396908762,
                         "image": "base-64 string",
-                        "measures": [
+                        "measures": {
                             "languages": [ 1, 3, 5 ],
                             "genres": [ 1, 6, 12, 14 ],
                             "subGenres": [ 2, 4, 9 ],
                             "moods": [ 1, 3 ],
                             "instruments": [ 6, 7, 9 ],
                             "similar": [ 1, 12, 119 ]
-                        ],
+                        },
                         "message": "Check this out!"
                     }
                 },
@@ -467,14 +467,14 @@ Returns an array of items.
                         "link": "stations/top-100-rock.html",
                         "date": 1396908762,
                         "image": "base-64 string",
-                        "measures": [
+                        "measures": {
                             "languages": [ 1, 3, 5 ],
                             "genres": [ 1, 6, 12, 14 ],
                             "subGenres": [ 2, 4, 9 ],
                             "moods": [ 1, 3 ],
                             "instruments": [ 6, 7, 9 ],
                             "similar": [ 1, 12, 119 ]
-                        ],
+                        },
                         "message": "Check this out!"
                     }
                 }
@@ -829,7 +829,7 @@ Stations that have been shared with the listener. Shared stations are similar to
                 }
             }
 
-### Retrieve all shared stations [GET]
+### Retrieve all shared stations from friends [GET]
 Returns an array of shared stations.
 
 + Response 200 (application/json)
@@ -976,7 +976,7 @@ This is the single playlist object.  It contains the following information:
                             "mood": "Happy", 
                             "instruments": "Guitar", 
                             "similar": "The Pied Pipers"
-                        }
+                        },
                         "length": "4:02",
                         "order": 1,
                         "songUrl": "play/songs/1"
@@ -995,7 +995,7 @@ This is the single playlist object.  It contains the following information:
                             "mood": "Happy", 
                             "instruments": "Guitar", 
                             "similar": "The Pied Pipers"
-                        }
+                        },
                         "length": "4:02",
                         "order": 2,
                         "songUrl": "play/songs/2"
@@ -1406,7 +1406,7 @@ The listener music player will return objects with the following properties.
                         "collection": "Best Of",
                         "length": "4:02",
                         "profilePicture": "base-64 string",
-                        "rating": 44.
+                        "rating": 44,
                         "tagIds": [ 1, 2, 3 ]
                     }
                 ]

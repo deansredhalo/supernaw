@@ -7,7 +7,7 @@
   "scripts": {
     "start": "node ./supernaw"
   },
-  "main":"./supernaw",
+  "main":"app.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/deansredhalo/supernaw"
@@ -20,7 +20,7 @@
     "rest"
   ],
   "engines": {
-     "node": "0.10.x"
+     "node": "0.12.x"
    },
   "dependencies": {
     "express": "~4.2.0",
