@@ -1,7 +1,7 @@
 {
-  "name": "Supernaw",
-  "version": "0.0.1",
-  "private": true,
+  "name": "supernaw",
+  "version": "0.1.1",
+  "private": false,
   "author": "T-Jay Tipps",
   "description": "Automatically generate a living, RESTful API backend for CRUD ops from an API Blueprint document.",
   "scripts": {

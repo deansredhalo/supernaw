@@ -77,7 +77,24 @@ Supernaw.prototype.declareRoutes = function(items) {
 				router.route(item.path).post(function(req, res) {
 					req.headers['content-type'] = 'application/json; charset=utf-8';
 
-					db.mycollection.save(req.body, function() {
+					db.mycollection.save(req.body, function(err, docs) {
+
+						console.log(Object.keys(req.body));
+
+						// for (var key2 in req.body) {
+						// 	for (var key in createdSchemas[item.title]) {
+						// 		var key_test = req.body[key2];
+
+						// 		if (typeof createdSchemas[item.title][key] != key_test) {
+						// 			err = 'NOPE';
+						// 		}
+						// 	}
+						// }
+
+						if (err) {
+							return res.send(err);
+						}
+
 						res.send({ message: 'Item Added', _id: req.body._id });
 					});
 
@@ -135,7 +152,9 @@ Supernaw.prototype.declareSchemas = function(models) {
 
 		var mongooseSchema = new Schema(schemaObj);
 
-		createdSchemas.push(mongooseSchema);
+		schemaObj.title = tmpObj['title'];
+
+		createdSchemas.push(schemaObj);
 
 		module.exports = mongoose.model(tmpObj['title'], mongooseSchema);
 	}
