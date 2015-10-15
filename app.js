@@ -25,7 +25,7 @@ var fileData;
 
 var databaseUrl = "supernaw";
 var collections = ["mycollection"]
-var db = mongojs.connect(databaseUrl, collections);
+var db = mongojs(databaseUrl, collections);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
